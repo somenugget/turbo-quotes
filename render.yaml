@@ -10,6 +10,8 @@ services:
     plan: free
     previewPlan: free
     branch: main
+    buildCommand: "./bin/build"
+    startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
       - key: REDIS_URL
         fromService:
