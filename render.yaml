@@ -52,8 +52,6 @@ services:
   - type: redis
     name: sidekiq_redis
     plan: free
-    previewPlan: free
   - type: redis
     name: cache_redis
     plan: free
-    previewPlan: free
