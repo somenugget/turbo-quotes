@@ -1,10 +1,20 @@
 previewsEnabled: true
 previewsExpireAfterDays: 1
+
 databases:
   - name: my_db
     plan: starter
     previewPlan: starter
+
 services:
+  - type: redis
+    name: sidekiq_redis
+    plan: starter
+    ipAllowList: [ ]
+  - type: redis
+    name: cache_redis
+    plan: starter
+    ipAllowList: [ ]
   - type: web
     name: app
     env: ruby
@@ -50,11 +60,3 @@ services:
         fromDatabase:
           name: my_db
           property: connectionString
-  - type: redis
-    name: sidekiq_redis
-    plan: starter
-    ipAllowList: []
-  - type: redis
-    name: cache_redis
-    plan: starter
-    ipAllowList: []
