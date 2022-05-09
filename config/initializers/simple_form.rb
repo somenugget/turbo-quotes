@@ -166,3 +166,6 @@ SimpleForm.setup do |config|
   # config.input_field_valid_class = 'is-valid'
   # config.input_field_error_class = 'is-invalid'
 end
+
+
+pp ENV.to_h
