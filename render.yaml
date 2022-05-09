@@ -2,13 +2,14 @@ previewsEnabled: true
 previewsExpireAfterDays: 1
 databases:
   - name: my_db
-    plan: free
-    previewPlan: free
+    plan: starter
+    previewPlan: starter
 services:
   - type: web
     name: app
-    plan: free
-    previewPlan: free
+    env: ruby
+    plan: starter
+    previewPlan: starter
     branch: main
     buildCommand: "./bin/build"
     startCommand: "bundle exec puma -C config/puma.rb"
@@ -30,8 +31,8 @@ services:
   - type: worker
     name: my_worker
     env: ruby
-    plan: free
-    previewPlan: free
+    plan: starter
+    previewPlan: starter
     buildCommand: bundle install
     startCommand: bundle exec sidekiq
     envVars:
@@ -51,7 +52,9 @@ services:
           property: connectionString
   - type: redis
     name: sidekiq_redis
-    plan: free
+    plan: starter
+    ipAllowList: []
   - type: redis
     name: cache_redis
-    plan: free
+    plan: starter
+    ipAllowList: []
