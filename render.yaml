@@ -1,0 +1,57 @@
+previewsEnabled: true
+previewsExpireAfterDays: 1
+databases:
+  - name: my_db
+    plan: free
+    previewPlan: free
+services:
+  - type: web
+    name: app
+    plan: free
+    previewPlan: free
+    branch: main
+    envVars:
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: sidekiq_redis
+          property: connectionString
+      - key: CACHE_REDIS_URL
+        fromService:
+          type: redis
+          name: cache_redis
+          property: connectionString
+      - key: DATABASE_URL
+          fromDatabase:
+            name: my_db
+            property: connectionString
+  - type: worker
+    name: my_worker
+    env: ruby
+    plan: free
+    previewPlan: free
+    buildCommand: bundle install
+    startCommand: bundle exec sidekiq
+    envVars:
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: sidekiq-redis
+          property: connectionString
+      - key: CACHE_REDIS_URL
+        fromService:
+          type: redis
+          name: cache_redis
+          property: connectionString
+      - key: DATABASE_URL
+          fromDatabase:
+            name: my_db
+            property: connectionString
+  - type: redis
+    name: sidekiq_redis
+    plan: free
+    previewPlan: free
+  - type: redis
+    name: cache_redis
+    plan: free
+    previewPlan: free
