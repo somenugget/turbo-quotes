@@ -4,22 +4,27 @@ previewsExpireAfterDays: 1
 databases:
   - name: my_db
     plan: starter
+    region: frankfurt
     previewPlan: starter
 
 services:
   - type: redis
     name: sidekiq_redis
     plan: starter
+    region: frankfurt
+    maxmemoryPolicy: noeviction
     ipAllowList: [ ]
   - type: redis
     name: cache_redis
     plan: starter
+    region: frankfurt
     ipAllowList: [ ]
   - type: web
     name: app
     env: ruby
     plan: starter
     previewPlan: starter
+    region: frankfurt
     branch: main
     buildCommand: "./bin/build"
     startCommand: "bundle exec puma -C config/puma.rb"
@@ -43,6 +48,7 @@ services:
     env: ruby
     plan: starter
     previewPlan: starter
+    region: frankfurt
     buildCommand: bundle install
     startCommand: bundle exec sidekiq
     envVars:
