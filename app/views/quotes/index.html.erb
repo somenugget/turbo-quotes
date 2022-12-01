@@ -1,7 +1,7 @@
 <main class="container">
   <%= turbo_frame_tag 'header_frame' do %>
     <div class="header">
-      <h1>Quotes</h1>
+      <h1>Add quotes</h1>
       <%= link_to "New quote", new_quote_path, class: "btn btn--primary", data: { turbo_frame: dom_id(Quote.new) } %>
     </div>
   <% end %>
